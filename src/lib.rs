@@ -39,7 +39,7 @@ macro_rules! bittypes {
 
                 fn get_bit(&self, bitdex:usize) -> bool {(self & 1<<bitdex) !=0 }
                 fn set_bit(&mut self, bitdex:usize, val:bool) {
-                    let bit = 1<<bitdex;
+                    let bit = (val as Self)<<bitdex;
                     *self &= !bit; //Clear bit
                     *self |= bit; //Set bit
                 }
