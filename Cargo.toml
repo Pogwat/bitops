@@ -2,5 +2,9 @@
 name = "bitops"
 version = "0.1.0"
 edition = "2024"
+description = "Bit Manipulation as fast as possible"
+license = "MIT"
+repository = "https://github.com/Pogwat/bitops"
+readme = "README.md"
 
 [dependencies]
