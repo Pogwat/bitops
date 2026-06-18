@@ -1,14 +1,25 @@
 pub trait BitOps:BitTypes {
+    /// Generate a bitmask for aa range of bits
     fn bitmask<R:RangeBounds<usize>+ NumRangeExtract<usize>>(range: &R) -> Self;
+    /// Get a specifc bit by bit index (0 indexed)
     fn get_bit(&self, bitdex:usize) -> bool;
+    /// Set a specifc bit by bit index (0 indexed)
     fn set_bit(&mut self, bitdex:usize, val:bool);
+    /// Get bits in range (0 indexed)
     fn get_bits<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&self, range:&R) -> Self;
+    /// count 0 bits in range (0 indexed)
     fn ctz<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&self, range:&R) -> usize;
+    /// count 1 bits in range (0 indexed)
     fn popcnt<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&self, range:&R) -> usize;
+    /// set bits in range to val (0 indexed)
     fn set_bits<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&mut self, range:&R, val:bool);
+    /// set all bits to val
     fn set_all_bit(val:bool) -> Self;
+    /// set a specfic range of self to these bits
     fn set_these_bits<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&mut self, bits:Self, range:&R);
+    /// get the first set bit can go OOB
     fn first_set_bit(&self) -> usize;
+    /// get the last set bit can go OOB
     fn last_set_bit(&self) -> usize;
 }
 use std::ops::{Shl,Sub,BitXor,Not};
