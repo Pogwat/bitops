@@ -1,3 +1,4 @@
+#[doc = include_str!("../README.md")]
 pub trait BitOps:BitTypes {
     /// Generate a bitmask for aa range of bits
     fn bitmask<R:RangeBounds<usize>+ NumRangeExtract<usize>>(range: &R) -> Self;
