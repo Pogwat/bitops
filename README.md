@@ -37,4 +37,13 @@ assert_eq!(num.ctz(&(0..=7)),3);
 assert_eq!(num.popcnt(&(0..=7)),5);
 ```
 
+set bits of a type to those of another
+```rust
+use bit_operations::BitOps;
+let mut num:u8     = 0b10011111;
+let bits_to_set:u8 = 0b01010000;
+num.set_these_bits(bits_to_set,&(0..=6));
+assert_eq!(   num,   0b11010000);
+```
+
 for full documentation use docs.rs: [docs](https://docs.rs/bit_operations/latest/bit_operations/)

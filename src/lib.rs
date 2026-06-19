@@ -16,7 +16,7 @@ pub trait BitOps:BitTypes {
     fn set_bits<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&mut self, range:&R, val:bool);
     /// set all bits to val
     fn set_all_bit(val:bool) -> Self;
-    /// set a specfic range of self to these bits
+    /// set a specfic range of self to these bits (0 indexed)
     fn set_these_bits<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&mut self, bits:Self, range:&R);
     /// get the first set bit can go OOB
     fn first_set_bit(&self) -> usize;
