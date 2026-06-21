@@ -62,3 +62,11 @@ fn bitops_set_these_bits() {
     println!("{:08b}", num); 
     assert_eq!(num, 255-2_u8.pow(3))
 }
+#[test]
+fn get_mut_bitops() {
+    let mut num:u8 =0b11111111;
+    { let mut bit_mut = num.get_mut(5);
+    *bit_mut =false;} //MUT REF MUST BE DROPPED FOR VAL TO BE UPDATED!!! DROP UPDATES
+    assert_eq!(num.get_bit(5), false);
+    assert_eq!(num,0b11011111);
+}

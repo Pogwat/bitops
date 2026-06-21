@@ -18,10 +18,11 @@ use std::ops::DerefMut;
 
 impl <'a,ElementType:BitOps> DerefMut for MutBitProxy<'a,ElementType> {
     fn deref_mut(&mut self) -> &mut Self::Target {&mut self.val}
+    
 }
 
 impl<'a, ElementType:BitOps> Drop for MutBitProxy<'a, ElementType> {
-    fn drop(&mut self) {self.addr.set_bit(self.bit as usize, self.val)}
+    fn drop(&mut self) {self.addr.set_bit(self.bit as usize, self.val)    }
 }
 
 impl <'a,ElementType:BitOps> MutBitProxy<'a,ElementType> {

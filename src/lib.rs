@@ -44,9 +44,9 @@ macro_rules! bittypes {
 
                 fn get_bit(&self, bitdex:usize) -> bool {(self & 1<<bitdex) !=0 }
                 fn set_bit(&mut self, bitdex:usize, val:bool) {
-                    let bit = (val as Self)<<bitdex;
+                    let bit = 1<<bitdex;
                     *self &= !bit; //Clear bit
-                    *self |= bit; //Set bit
+                    *self |= (val as Self)<<bitdex; //Set bit
                 }
 
                 fn ctz<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&self, range:&R) -> usize {
@@ -69,6 +69,7 @@ macro_rules! bittypes {
                 }
                 fn first_set_bit(&self) -> usize {self.trailing_zeros() as usize} //Can go OOB
                 fn last_set_bit(&self) -> usize {(Self::BITS -1 - self.leading_zeros()) as usize} //Can go OOB
+                //Get Mut ref to bit, MUST DROP REF FOR BIT TO UPDATE!!!!
                 fn get_mut(&mut self, bit:usize) -> MutBitProxy<Self> {MutBitProxy::<Self>::new(self,bit)}
             }
         )*
