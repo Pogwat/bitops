@@ -44,9 +44,8 @@ macro_rules! bittypes {
 
                 fn get_bit(&self, bitdex:usize) -> bool {(self & 1<<bitdex) !=0 }
                 fn set_bit(&mut self, bitdex:usize, val:bool) {
-                    let bit = 1<<bitdex;
-                    *self &= !bit; //Clear bit
-                    *self |= (val as Self)<<bitdex; //Set bit
+                    let mask = 1<<bitdex;
+                    *self = (*self & !mask) | (val as Self)<<bitdex; //Clear bit then set it
                 }
 
                 fn ctz<R:RangeBounds<usize>+ NumRangeExtract<usize>>(&self, range:&R) -> usize {
