@@ -1,3 +1,4 @@
+#![no_std]
 #[doc = include_str!("../README.md")]
 pub mod mut_proxy;
 pub use mut_proxy::MutBitProxy;
@@ -27,7 +28,7 @@ pub trait BitOps:BitTypes {
     // get mutable ref to type using proxy
     fn mut_bit(&mut self, bit:usize) -> MutBitProxy<'_,Self>;
 }
-use std::ops::{Shl,Sub,BitXor,Not};
+use core::ops::{Shl,Sub,BitXor,Not};
 pub trait BitTypes: Sized+Shl<usize, Output = Self> + Sub<Self, Output = Self> + BitXor<Self, Output = Self> +  Not{}
 
 macro_rules! bittypes {
@@ -76,8 +77,7 @@ macro_rules! bittypes {
 }
 bittypes!(u8,u16,u32,u64,usize);
 
-use std::ops::Bound;
-use std::ops::RangeBounds;
+use core::ops::{Bound,RangeBounds};
 
 pub trait NumRangeExtract<T>: RangeBounds<T>  {
     fn end(&self) -> Option<T>;

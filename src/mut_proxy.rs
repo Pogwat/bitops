@@ -7,14 +7,12 @@ pub struct MutBitProxy<'a,ElementType:BitOps> {
     bit:u8    
 }
 
-use std::ops::Deref;
+use core::ops::{Deref,DerefMut};
 
 impl<'a,ElementType:BitOps> Deref for MutBitProxy<'a,ElementType> {
     type Target = bool;
     fn deref(&self) -> &Self::Target {&self.val} //Cant mutate cuz &self
 }
-
-use std::ops::DerefMut;
 
 impl <'a,ElementType:BitOps> DerefMut for MutBitProxy<'a,ElementType> {
     fn deref_mut(&mut self) -> &mut Self::Target {&mut self.val}
