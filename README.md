@@ -54,4 +54,16 @@ num.set_bits(&(1..=5),false);
 assert_eq!(num, 0b11000001);
 ```
 
+Get Mutable Refrence to Bit. IMPORTANT: ref needs to be dropped for bit to update
+```rust
+use bit_operations::BitOps;
+let mut num:u8 =0;
+{ 
+    let mut bit_mut = num.get_mut(7);
+    *bit_mut =true;
+} //MUT REF MUST BE DROPPED FOR BIT TO BE UPDATED!!! DROP UPDATES
+assert_eq!(num.get_bit(7), true);
+assert_eq!(num,0b10000000);
+```
+
 for full documentation use docs.rs: [docs](https://docs.rs/bit_operations/latest/bit_operations/)

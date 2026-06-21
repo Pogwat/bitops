@@ -1,6 +1,6 @@
 //self[index] == *(self[index]) not (*self)[index] , deref on index return not self
 use crate::BitOps;
-
+//Proxy For Bit Mutating
 pub struct MutBitProxy<'a,ElementType:BitOps> {
     val:bool,
     addr: &'a mut ElementType,
@@ -26,6 +26,7 @@ impl<'a, ElementType:BitOps> Drop for MutBitProxy<'a, ElementType> {
 }
 
 impl <'a,ElementType:BitOps> MutBitProxy<'a,ElementType> {
+    //New proxy
     pub fn new(addr:&'a mut ElementType,bit:usize) -> Self {
         Self {val: addr.get_bit(bit),addr,bit:bit as u8}
     }
