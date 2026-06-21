@@ -1,5 +1,6 @@
 # bitops
 Bit manipulation as fast as possible
+#![no_std] compatible
 
 ## Common Examples 
 Set a specific bit in a type
