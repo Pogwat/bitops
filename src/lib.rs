@@ -74,7 +74,7 @@ macro_rules! bittypes {
         )*
     }
 }
-bittypes!(u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize);
+bittypes!(u8,u16,u32,u64,u128,usize,i8,i16,i32,i64,i128,isize);
 
 use core::ops::{Bound,RangeBounds};
 
@@ -117,4 +117,4 @@ macro_rules! num_rangy {
     }
 }
 
-num_rangy!(u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize);
+num_rangy!(u8,u16,u32,u64,u128,usize,i8,i16,i32,i64,i128,isize);
