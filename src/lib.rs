@@ -25,7 +25,7 @@ pub trait BitOps:BitTypes {
     fn first_set_bit(&self) -> usize;
     /// get the last set bit can go OOB
     fn last_set_bit(&self) -> usize;
-    // get mutable ref to type using proxy
+    /// get mutable ref to type using proxy, MUST DROP REF FOR BIT TO UPDATE!!!!
     fn mut_bit(&mut self, bit:usize) -> MutBitProxy<'_,Self>;
 }
 use core::ops::{Shl,Sub,BitXor,Not};
@@ -69,13 +69,12 @@ macro_rules! bittypes {
                 }
                 fn first_set_bit(&self) -> usize {self.trailing_zeros() as usize} //Can go OOB
                 fn last_set_bit(&self) -> usize {(Self::BITS -1 - self.leading_zeros()) as usize} //Can go OOB
-                //Get Mut ref to bit, MUST DROP REF FOR BIT TO UPDATE!!!!
-                fn mut_bit(&mut self, bit:usize) -> MutBitProxy<'_,Self> {MutBitProxy::<Self>::new(self,bit)}
+                fn mut_bit(&mut self, bit:usize) -> MutBitProxy<'_,Self> {MutBitProxy::<Self>::new(self,bit)} //Returns proxy struct, on drop proxy updates bit
             }
         )*
     }
 }
-bittypes!(u8,u16,u32,u64,usize);
+bittypes!(u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize);
 
 use core::ops::{Bound,RangeBounds};
 
@@ -118,5 +117,4 @@ macro_rules! num_rangy {
     }
 }
 
-
-num_rangy!(u8,u16,u32,u64,usize);
+num_rangy!(u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,usize);
